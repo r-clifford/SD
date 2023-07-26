@@ -686,9 +686,13 @@ uint8_t Sd2Card::writeData(uint8_t token, const uint8_t* src) {
 
   #else  // OPTIMIZE_HARDWARE_SPI
   spiSend(token);
-  for (uint16_t i = 0; i < 512; i++) {
-    spiSend(src[i]);
-  }
+  // single write
+  //for (uint16_t i = 0; i < 512; i++) {
+  //  spiSend(src[i]);
+  //}
+  uint8_t temp[512];
+  memcpy(temp, src, 512);
+  SDCARD_SPI.transfer(temp, 512);
   #endif  // OPTIMIZE_HARDWARE_SPI
   spiSend(0xff);  // dummy crc
   spiSend(0xff);  // dummy crc

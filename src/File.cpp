@@ -49,7 +49,7 @@ char *File::name(void) {
 }
 
 // a directory is a special type of file
-bool File::isDirectory(void) {
+boolean File::isDirectory(void) {
   return (_file && _file->isDir());
 }
 
@@ -123,7 +123,7 @@ void File::flush() {
   }
 }
 
-bool File::seek(uint32_t pos) {
+boolean File::seek(uint32_t pos) {
   if (! _file) {
     return false;
   }
